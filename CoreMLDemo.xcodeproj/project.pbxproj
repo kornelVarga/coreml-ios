@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB103ACE237C88E4009F61B5 /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB103ACD237C88E4009F61B5 /* Prediction.swift */; };
 		CB3BD34B236317F8006BE37C /* scene_classification.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CB3BD34A236317F8006BE37C /* scene_classification.mlmodel */; };
 		CB9057AF235E1A0C00E872E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9057AE235E1A0C00E872E0 /* AppDelegate.swift */; };
 		CB9057B1235E1A0C00E872E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9057B0235E1A0C00E872E0 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB103ACD237C88E4009F61B5 /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		CB3BD34A236317F8006BE37C /* scene_classification.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = scene_classification.mlmodel; sourceTree = "<group>"; };
 		CB9057AB235E1A0C00E872E0 /* CoreMLDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreMLDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9057AE235E1A0C00E872E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB103ACA237C8861009F61B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CB103ACD237C88E4009F61B5 /* Prediction.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CB103ACB237C886A009F61B5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CB9057B0235E1A0C00E872E0 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CB103ACC237C8875009F61B5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CB9057B2235E1A0C00E872E0 /* Main.storyboard */,
+				CB9057B5235E1A0D00E872E0 /* Assets.xcassets */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		CB9057A2235E1A0C00E872E0 = {
 			isa = PBXGroup;
 			children = (
@@ -56,10 +83,10 @@
 		CB9057AD235E1A0C00E872E0 /* CoreMLDemo */ = {
 			isa = PBXGroup;
 			children = (
+				CB103ACC237C8875009F61B5 /* View */,
+				CB103ACB237C886A009F61B5 /* Controller */,
+				CB103ACA237C8861009F61B5 /* Model */,
 				CB9057AE235E1A0C00E872E0 /* AppDelegate.swift */,
-				CB9057B0235E1A0C00E872E0 /* ViewController.swift */,
-				CB9057B2235E1A0C00E872E0 /* Main.storyboard */,
-				CB9057B5235E1A0D00E872E0 /* Assets.xcassets */,
 				CB9057B7235E1A0D00E872E0 /* LaunchScreen.storyboard */,
 				CB9057BA235E1A0D00E872E0 /* Info.plist */,
 				CB3BD34A236317F8006BE37C /* scene_classification.mlmodel */,
@@ -138,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB103ACE237C88E4009F61B5 /* Prediction.swift in Sources */,
 				CB3BD34B236317F8006BE37C /* scene_classification.mlmodel in Sources */,
 				CB9057B1235E1A0C00E872E0 /* ViewController.swift in Sources */,
 				CB9057AF235E1A0C00E872E0 /* AppDelegate.swift in Sources */,
