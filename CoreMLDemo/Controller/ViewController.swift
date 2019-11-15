@@ -13,16 +13,37 @@ import VideoToolbox
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBOutlet var txtOutput: UITextView!
     @IBOutlet var imgGuess: UIImageView!
     @IBOutlet var btnPickImage: UIButton!
-
+    
+    @IBOutlet var resultLabel1: UILabel!
+    @IBOutlet var resultLabel2: UILabel!
+    @IBOutlet var resultLabel3: UILabel!
+    
+    @IBOutlet var resultPercent1: UILabel!
+    @IBOutlet var resultPercent2: UILabel!
+    @IBOutlet var resultPercent3: UILabel!
+    
+    @IBOutlet var resultBarConstraint1: NSLayoutConstraint!
+    @IBOutlet var resultBarConstraint2: NSLayoutConstraint!
+    @IBOutlet var resultBarConstraint3: NSLayoutConstraint!
+    
+    @IBOutlet var resultBarRef: UIView!
+    
     var predictionList = [Prediction]()
+    var columnWidth: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         btnPickImage.layer.cornerRadius = 10
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        columnWidth = resultBarRef.frame.size.width
+        print(columnWidth)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -57,15 +78,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func updateUI() {
-        var outputText = ""
         
-        for prediction in predictionList {
-            var str = NSString(format: "\(prediction.label) -> %.2f" as NSString, prediction.probability * 100) as String
-            str += "%"
-            outputText += "\(str)\n"
+        let sortedPredictions = predictionList.sorted(by: { $0.probability > $1.probability }).prefix(3)
+        let resultLabelArray = [resultLabel1, resultLabel2, resultLabel3]
+        let resultPercentArray = [resultPercent1, resultPercent2, resultPercent3]
+        let resultBarConstraintArray = [resultBarConstraint1, resultBarConstraint2, resultBarConstraint3]
+        
+        for (index, result) in sortedPredictions.enumerated() {
+            resultLabelArray[index]?.text = result.label
+            resultPercentArray[index]?.text = NSString(format: "%.2f", result.probability * 100) as String + "%"
+            resultBarConstraintArray[index]?.constant = columnWidth * CGFloat((1 - result.probability))
         }
-        
-        txtOutput.text = outputText
     }
     
     @IBAction func takePhoto(_ sender: Any) {
