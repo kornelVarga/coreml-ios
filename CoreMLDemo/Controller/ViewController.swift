@@ -9,12 +9,13 @@
 import UIKit
 import CoreML
 import Vision
-import VideoToolbox
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var imgGuess: UIImageView!
     @IBOutlet var btnPickImage: UIButton!
+    
+    @IBOutlet var chartArea: UIStackView!
     
     @IBOutlet var resultLabel1: UILabel!
     @IBOutlet var resultLabel2: UILabel!
@@ -35,7 +36,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        chartArea.isHidden = true
         btnPickImage.layer.cornerRadius = 10
     }
     
@@ -68,7 +70,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 
                 for prediction in predictions.output {
                     
-                    predictionList.append(Prediction(label: prediction.key, probability: prediction.value))
+                    predictionList.append(Prediction(label: prediction.key.capitalizingFirstLetter(), probability: prediction.value))
                     updateUI()
                 }
             }
@@ -79,6 +81,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func updateUI() {
         
+        chartArea.isHidden = false
         let sortedPredictions = predictionList.sorted(by: { $0.probability > $1.probability }).prefix(3)
         let resultLabelArray = [resultLabel1, resultLabel2, resultLabel3]
         let resultPercentArray = [resultPercent1, resultPercent2, resultPercent3]
@@ -146,5 +149,15 @@ extension UIImage {
         CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
         return pixelBuffer
+    }
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+      return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+      self = self.capitalizingFirstLetter()
     }
 }
